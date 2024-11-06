@@ -44,14 +44,36 @@ public class Inventario : MonoBehaviour
     {
         if (coll.CompareTag("Item"))
         {
-            for (int i = 0; i < SlotHolder.Count; i++)
+            // Obtener el componente RawImage del objeto con el que colisionas
+            RawImage rawImage = coll.GetComponent<RawImage>();
+
+            // Verificar si el objeto colisionado tiene un componente RawImage
+            if (rawImage != null)
             {
-                if(SlotHolder[i].GetComponent<Image>().enabled == false)
+                for (int i = 0; i < SlotHolder.Count; i++)
                 {
-                    SlotHolder[i].GetComponent<Image>().enabled = true;
-                    SlotHolder[i].GetComponent <Image>().sprite = coll.GetComponent<SpriteRenderer>().sprite;
-                    break;
+                    if (SlotHolder[i].GetComponent<Image>().enabled == false)
+                    {
+                        SlotHolder[i].GetComponent<Image>().enabled = true;
+
+                        // Crear un nuevo Sprite a partir de la textura del RawImage y asignarlo al Image del SlotHolder
+                        Texture2D texture = rawImage.texture as Texture2D;
+                        if (texture != null)
+                        {
+                            SlotHolder[i].GetComponent<Image>().sprite = Sprite.Create(
+                                texture,
+                                new Rect(0, 0, texture.width, texture.height),
+                                new Vector2(0.5f, 0.5f)
+                            );
+                        }
+
+                        break;
+                    }
                 }
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró un componente RawImage en el objeto colisionado.");
             }
         }
     }
