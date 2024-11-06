@@ -24,8 +24,6 @@ public class PlayerManager : MonoBehaviour
     {
         salud -= dmg;  // Resta la cantidad de daño
 
-        anim.SetTrigger("Hurt");
-
         Die();
     }
 
@@ -33,12 +31,10 @@ public class PlayerManager : MonoBehaviour
     {
         if (salud <= 0)
         {
-            muerte.Play();
+            //muerte.Play();
             anim.SetTrigger("Dead");
             Invoke("DestruirPersonaje", 1f); 
-             // Espera 1 segundos antes de destruir el objeto
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            
+             // Espera 1 segundos antes de destruir el objeto            
         }
     }
 
