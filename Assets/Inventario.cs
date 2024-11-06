@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Inventario : MonoBehaviour
 {
+    public  List<GameObject> SlotHolder = new List<GameObject>();
+
     public bool inventoryEnabled;
     public GameObject inventario;
 
@@ -34,6 +36,22 @@ public class Inventario : MonoBehaviour
             else
             {
                 inventario.SetActive(false);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("Item"))
+        {
+            for (int i = 0; i < SlotHolder.Count; i++)
+            {
+                if(SlotHolder[i].GetComponent<Image>().enabled == false)
+                {
+                    SlotHolder[i].GetComponent<Image>().enabled = true;
+                    SlotHolder[i].GetComponent <Image>().sprite = coll.GetComponent<SpriteRenderer>().sprite;
+                    break;
+                }
             }
         }
     }
