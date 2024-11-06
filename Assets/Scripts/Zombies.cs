@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemigoPerseguimiento3D : MonoBehaviour
+public class Zombies : MonoBehaviour
 {
     [Header("Salud")]
     public float salud;
@@ -88,7 +88,7 @@ public class EnemigoPerseguimiento3D : MonoBehaviour
     {
         if (salud <= 0)
         {
-            muerte.Play();
+            //muerte.Play();
             //anim.SetTrigger("Dead");
             Invoke("DestruirPersonaje", 1f);  // Espera 1 segundo antes de destruir el objeto
         } 
