@@ -55,17 +55,9 @@ public class Inventario : MonoBehaviour
                     if (SlotHolder[i].GetComponent<Image>().enabled == false)
                     {
                         SlotHolder[i].GetComponent<Image>().enabled = true;
-
-                        // Crear un nuevo Sprite a partir de la textura del RawImage y asignarlo al Image del SlotHolder
-                        Texture2D texture = rawImage.texture as Texture2D;
-                        if (texture != null)
-                        {
-                            SlotHolder[i].GetComponent<Image>().sprite = Sprite.Create(
-                                texture,
-                                new Rect(0, 0, texture.width, texture.height),
-                                new Vector2(0.5f, 0.5f)
-                            );
-                        }
+                        //SlotHolder[i].GetComponent<Image>().sprite = coll.GetComponent<RawImage>();
+                        break;
+                    }
 
                         break;
                     }
@@ -76,7 +68,7 @@ public class Inventario : MonoBehaviour
                 Debug.LogWarning("No se encontró un componente RawImage en el objeto colisionado.");
             }
         }
-    }
+    
 
     public void PanelAcertijo()
     {
@@ -124,3 +116,4 @@ public class Inventario : MonoBehaviour
         Texto2.gameObject.SetActive(false);
     }
 }
+
