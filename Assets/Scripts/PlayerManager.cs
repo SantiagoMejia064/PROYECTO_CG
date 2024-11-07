@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
     public int salud;
     public GameObject Player;
     private Animator anim;
-    public AudioSource muerte;
+    //public AudioSource muerte;
 
     void Start()
     {

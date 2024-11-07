@@ -15,7 +15,7 @@ public class Zombies : MonoBehaviour
     public Animator anim; // Referencia al Animator del enemigo
 
     private Rigidbody rb;
-    public AudioSource muerte;
+    //public AudioSource muerte;
 
 
     void Start()
@@ -42,9 +42,10 @@ public class Zombies : MonoBehaviour
     void Update()
     {
         if (player == null)
-        {
-            return;
-        }
+            {
+                Debug.LogWarning("El jugador no está asignado");
+                return;
+            }
 
         float distancia = Vector3.Distance(transform.position, player.position);
 

@@ -10,11 +10,11 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField] private float timeEntreAtaque;
     [SerializeField] private float timeSigAtaque;
     
-    private Animator anim;
+    //private Animator anim;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     void Update()
