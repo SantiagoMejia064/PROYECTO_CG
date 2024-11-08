@@ -44,10 +44,10 @@ public class Inventario : MonoBehaviour
     {
         if (coll.CompareTag("Item"))
         {
-            // Obtener el componente RawImage del objeto con el que colisionas
+            
             RawImage rawImage = coll.GetComponent<RawImage>();
 
-            // Verificar si el objeto colisionado tiene un componente RawImage
+            
             if (rawImage != null)
             {
                 for (int i = 0; i < SlotHolder.Count; i++)
@@ -55,7 +55,7 @@ public class Inventario : MonoBehaviour
                     if (SlotHolder[i].GetComponent<Image>().enabled == false)
                     {
                         SlotHolder[i].GetComponent<Image>().enabled = true;
-                        //SlotHolder[i].GetComponent<Image>().sprite = coll.GetComponent<RawImage>();
+                        
                         break;
                     }
 
