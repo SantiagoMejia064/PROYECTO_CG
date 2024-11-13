@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Interfaz")]
     public Image barraSalud;
     public Text textoSalud;
-    public CanvasGroup ojosRojos;
+    //public CanvasGroup ojosRojos;
 
 
     public GameObject Player;
@@ -24,14 +24,14 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         actualizarSalud();
         if(ojosRojos.alpha > 0)
         {
             ojosRojos.alpha -= Time.deltaTime;
         }
-    }
+    }*/
 
     void actualizarSalud(){
         barraSalud.fillAmount = (float)salud / maxSalud;
@@ -41,7 +41,7 @@ public class PlayerManager : MonoBehaviour
     public void GetDamage(int dmg)
     {
         salud -= dmg;  // Resta la cantidad de daño
-        ojosRojos.alpha = 1;  // Hace que los ojos rojos se vean
+        //ojosRojos.alpha = 1;  // Hace que los ojos rojos se vean
 
         Die();
     }
