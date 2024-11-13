@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    public int salud;
+    public int salud = 100;
+    public int maxSalud = 100;
+
+    [Header("Interfaz")]
+    public Image barraSalud;
+    public Text textoSalud;
+
+
     public GameObject Player;
     private Animator anim;
     //public AudioSource muerte;
@@ -17,7 +25,12 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        actualizarSalud();
+    }
+
+    void actualizarSalud(){
+        barraSalud.fillAmount = (float)salud / maxSalud;
+        textoSalud.text = salud.ToString() + " / " + maxSalud.ToString("f0");
     }
 
         public void GetDamage(int dmg)
