@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Zombies : MonoBehaviour
 {
+    [SerializeField] private float timeEntreAtaque;
+    [SerializeField] private float timeSigAtaque;
+
     [Header("Salud")]
     public float salud;
     
@@ -41,11 +44,7 @@ public class Zombies : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
-            {
-                Debug.LogWarning("El jugador no está asignado");
-                return;
-            }
+        timeEntreAtaque += Time.deltaTime;
 
         float distancia = Vector3.Distance(transform.position, player.position);
 
@@ -71,10 +70,14 @@ public class Zombies : MonoBehaviour
             anim.SetBool("Walk", false); // Desactivar animación de caminar
         }
 
-        if (distancia <= rangoAtaque)
+        if (timeEntreAtaque > timeSigAtaque)
         {
-            // Atacar al jugador
-            anim.SetTrigger("Attack");
+            if (distancia <= rangoAtaque)
+            {
+                // Atacar al jugador
+                anim.SetTrigger("Attack");
+                timeEntreAtaque = 0;
+            }
         }
     }
     

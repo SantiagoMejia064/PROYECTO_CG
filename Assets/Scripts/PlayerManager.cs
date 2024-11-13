@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Interfaz")]
     public Image barraSalud;
     public Text textoSalud;
+    public CanvasGroup ojosRojos;
 
 
     public GameObject Player;
@@ -26,6 +27,10 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         actualizarSalud();
+        if(ojosRojos.alpha > 0)
+        {
+            ojosRojos.alpha -= Time.deltaTime;
+        }
     }
 
     void actualizarSalud(){
@@ -33,9 +38,10 @@ public class PlayerManager : MonoBehaviour
         textoSalud.text = salud.ToString() + " / " + maxSalud.ToString("f0");
     }
 
-        public void GetDamage(int dmg)
+    public void GetDamage(int dmg)
     {
         salud -= dmg;  // Resta la cantidad de daño
+        ojosRojos.alpha = 1;  // Hace que los ojos rojos se vean
 
         Die();
     }
