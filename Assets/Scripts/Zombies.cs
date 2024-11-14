@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Zombies : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Zombies : MonoBehaviour
     
     [Header("Referencias")]
     public Transform player; // Referencia al jugador
+    public NavMeshAgent agent;
     public PlayerManager playerManager;
     public float rangoDeteccion = 5f; // Rango de detección para seguir al jugador
     public float rangoAtaque = 1f; // Rango de ataque al jugador
@@ -35,7 +37,8 @@ public class Zombies : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
-
+        agent = GetComponent<NavMeshAgent>();
+        
         if (anim == null)
         {
             anim = GetComponent<Animator>();
@@ -51,6 +54,11 @@ public class Zombies : MonoBehaviour
 
         if (distancia <= rangoDeteccion)
         {
+           
+            agent.destination = player.position;
+            anim.SetBool("Walk", true); // Activar animación de caminar
+
+            /*
             // Dirección hacia el jugador
             Vector3 direccion = (player.position - transform.position).normalized;
 
@@ -63,12 +71,17 @@ public class Zombies : MonoBehaviour
             // Rotación del enemigo usando Quaternion para evitar conflictos
             Quaternion nuevaRotacion = Quaternion.LookRotation(new Vector3(direccion.x, 0, direccion.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, nuevaRotacion, Time.deltaTime * velocidad);
+            */
         }
         else
         {
+            /*
             // Si el jugador está fuera del rango, detener el movimiento
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            */
+            agent.destination = agent.transform.position;
             anim.SetBool("Walk", false); // Desactivar animación de caminar
+            
         }
 
         if(player != null && playerManager.salud > 0){
