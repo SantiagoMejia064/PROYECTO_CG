@@ -8,21 +8,9 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField] private float radioGolpe;
     [SerializeField] private int damageGolpe;
     
-
-
-    void Start()
-    {
-        //anim = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void Atacar()
     {
-
+        
         // Crear un área esférica para detectar colisión con el jugador
         Collider[] colisiones = Physics.OverlapSphere(controlGolpe.position, radioGolpe, LayerMask.GetMask("Player"));
         // Verificar si se ha encontrado algún jugador dentro del área de colisión

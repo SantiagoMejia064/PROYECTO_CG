@@ -12,6 +12,7 @@ public class Zombies : MonoBehaviour
     
     [Header("Referencias")]
     public Transform player; // Referencia al jugador
+    public PlayerManager playerManager;
     public float rangoDeteccion = 5f; // Rango de detección para seguir al jugador
     public float rangoAtaque = 1f; // Rango de ataque al jugador
     public float velocidad = 2f; // Velocidad de movimiento del enemigo
@@ -70,15 +71,17 @@ public class Zombies : MonoBehaviour
             anim.SetBool("Walk", false); // Desactivar animación de caminar
         }
 
-        if (timeEntreAtaque > timeSigAtaque)
-        {
-            if (distancia <= rangoAtaque)
-            {
-                // Atacar al jugador
-                anim.SetTrigger("Attack");
-                timeEntreAtaque = 0;
+        if(player != null && playerManager.salud > 0){
+            if (timeEntreAtaque > timeSigAtaque){
+                if (distancia <= rangoAtaque)
+                {
+                    // Atacar al jugador
+                    anim.SetTrigger("Attack");
+                    timeEntreAtaque = 0;
+                }
             }
         }
+        
     }
     
 
@@ -93,8 +96,8 @@ public class Zombies : MonoBehaviour
         if (salud <= 0)
         {
             //muerte.Play();
-            //anim.SetTrigger("Dead");
-            Invoke("DestruirPersonaje", 1f);  // Espera 1 segundo antes de destruir el objeto
+            anim.SetTrigger("Death");
+            Invoke("DestruirPersonaje", 5f);  // Espera 1 segundo antes de destruir el objeto
         } 
     }
 
