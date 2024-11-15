@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Item
   - Enemigo
+  - Jeringa
+  - Planta
+  - Curas
   layers:
   - Default
   - TransparentFX
