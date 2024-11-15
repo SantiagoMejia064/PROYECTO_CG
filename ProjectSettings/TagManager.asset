@@ -9,6 +9,10 @@ TagManager:
   - Jeringa
   - Planta
   - Curas
+  - MedKit
+  - Mata
+  - MedKitIMG
+  - MataIMG
   layers:
   - Default
   - TransparentFX
