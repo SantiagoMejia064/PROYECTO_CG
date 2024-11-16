@@ -7,6 +7,7 @@ public class Llave : MonoBehaviour
     public GameObject llave;
     public GameObject IMGLlave;
     public GameObject MensajeLlave;
+    public GameObject puertas;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,12 +17,14 @@ public class Llave : MonoBehaviour
 
             MensajeLlave.SetActive(true);
         }
+        
     }
 
     public void CerrarMensaje()
     {
         MensajeLlave.SetActive(false);
         Destroy(llave);
+        Destroy(puertas);
     }
 
 }
