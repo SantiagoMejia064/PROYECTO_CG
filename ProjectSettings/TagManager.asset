@@ -13,6 +13,8 @@ TagManager:
   - Mata
   - MedKitIMG
   - MataIMG
+  - Libro
+  - Llave
   layers:
   - Default
   - TransparentFX
