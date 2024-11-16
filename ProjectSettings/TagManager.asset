@@ -15,6 +15,7 @@ TagManager:
   - MataIMG
   - Libro
   - Llave
+  - Trofeo
   layers:
   - Default
   - TransparentFX
