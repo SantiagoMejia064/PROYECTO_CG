@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventario : MonoBehaviour
 {
-    public List<GameObject> SlotHolder = new List<GameObject>();
+    public GameObject[] Slots = new GameObject[6];
 
     public bool inventoryEnabled;
     public GameObject inventario;
@@ -35,12 +36,9 @@ public class Inventario : MonoBehaviour
     public Text Texto3;
     public Text Mensaje;
 
-    public GameObject interactionPanel; // Panel de mensaje
-         
-
     private void Start()
     {
-        interactionPanel.SetActive(false); // Asegura que el panel esté desactivado al inicio
+        
     }
 
     private void Update()
@@ -89,12 +87,12 @@ public class Inventario : MonoBehaviour
 
     public void InteractOBJ1()
     {
-        // Verifica si la imagen del libro está desactivada
+
         if (!IMGLibro.activeSelf)
         {
             Mensaje.gameObject.SetActive(true);
         }
-        else if(IMGLibro.activeSelf)
+        else if (IMGLibro.activeSelf)
         {
             Texto1.gameObject.SetActive(true);
             Texto2.gameObject.SetActive(false);
@@ -105,12 +103,12 @@ public class Inventario : MonoBehaviour
 
     public void InteractOBJ2()
     {
-        // Verifica si la imagen de la llave está desactivada
+
         if (!IMGLlave.activeSelf)
         {
             Mensaje.gameObject.SetActive(true);
         }
-        else if(IMGLlave.activeSelf)
+        else if (IMGLlave.activeSelf)
         {
             Texto2.gameObject.SetActive(true);
             Texto3.gameObject.SetActive(false);
@@ -133,7 +131,18 @@ public class Inventario : MonoBehaviour
             Mensaje.gameObject.SetActive(true);
         }
     }
+    public bool AgregarAlInventario(GameObject imagenObjeto)
+    {
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            if (Slots[i] == null) // Encuentra un slot vacío
+            {
+                Slots[i] = imagenObjeto; // Asigna la imagen al slot
+                imagenObjeto.SetActive(true); // Activa la imagen en el inventario
+                return true; // Devuelve verdadero si se agregó
+            }
+        }
+        return false; // Devuelve falso si no hay espacio
+    }
+
 }
-
-
-

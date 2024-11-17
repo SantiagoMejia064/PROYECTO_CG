@@ -4,15 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Item
   - Enemigo
-  - Jeringa
-  - Planta
-  - Curas
   - MedKit
   - Mata
-  - MedKitIMG
-  - MataIMG
   - Libro
   - Llave
   - Trofeo
