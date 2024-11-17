@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class Libro : MonoBehaviour
 {
-    public GameObject libro;      
-    public GameObject IMGLibro;   
+    public GameObject libro;
+    public GameObject IMGLibro;
     public GameObject Mensaje;
 
     private void OnTriggerEnter(Collider other)
@@ -15,7 +15,6 @@ public class Libro : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             IMGLibro.SetActive(true);
-
             Mensaje.SetActive(true);
         }
     }
