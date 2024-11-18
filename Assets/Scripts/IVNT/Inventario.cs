@@ -52,14 +52,11 @@ public class Inventario : MonoBehaviour
     private Sprite itemIcon;
 
 	[Header("Sonidos")]
-    public AudioSource cogerLlave;
-    public AudioSource cogerMedkit;
-    public AudioSource cogerMata;
     public AudioSource cogerMunicion;
     public AudioSource CogerObjeto;
     public AudioSource CogerTrofeo_voz;
     public AudioSource CogerTrofeo_sonido;
-    public AudioSource curacion;
+    
     
 
     private void Start()
@@ -101,6 +98,7 @@ public class Inventario : MonoBehaviour
         if (other.tag == "Item")
         {
             itemRecogido = other.gameObject;
+			
             Item item = itemRecogido.GetComponent<Item>();
 
             // Asignar datos temporales del item
@@ -119,6 +117,7 @@ public class Inventario : MonoBehaviour
         {
             // Llamar a AddItem con los datos temporales
             AddItem(itemRecogido, itemID, itemType, itemDescription, itemIcon);
+			CogerObjeto.Play();
             panelRecoger.SetActive(false);
         }
     }

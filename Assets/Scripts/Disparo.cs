@@ -8,9 +8,10 @@ public class DisparoPrefab : MonoBehaviour
     public GameObject balaPrefab;
     public float fireRate;
     private Animator anim;
-    //public AudioSource disparo;
+    
     [SerializeField] private float tiempoDisparo;
     
+    public AudioSource disparo;
 
     void Awake()
     {
@@ -19,7 +20,7 @@ public class DisparoPrefab : MonoBehaviour
 
     public void Disparar()
     {
-        //disparo.Play();
+        
         Instantiate(balaPrefab, firePoint.position, firePoint.rotation);
         
     }
@@ -34,6 +35,7 @@ public class DisparoPrefab : MonoBehaviour
             {
                 //Disparar();
                 anim.SetTrigger("Shoot");
+                disparo.Play();
                 tiempoDisparo = 0;
             }
         }   

@@ -20,6 +20,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     private Inventario inventario;
 
+    [Header("Sonidos")]
+    public AudioSource curacion;
+
     private void Start()
     {
         //slotIconGameObject = transform.GetChild(0);
@@ -44,6 +47,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
             UsarItem();
 
             Destroy(item);
+
+            curacion.Play();
 
             ClearSlot();
         }

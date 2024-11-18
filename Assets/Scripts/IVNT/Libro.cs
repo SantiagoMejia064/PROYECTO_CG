@@ -10,11 +10,15 @@ public class Libro : MonoBehaviour
     public GameObject IMGLibro;
     public GameObject Mensaje;
 
+    [Header("Sonidos")]
+    public AudioSource CogerObjeto;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             IMGLibro.SetActive(true);
+            CogerObjeto.Play();
             Mensaje.SetActive(true);
         }
     }
