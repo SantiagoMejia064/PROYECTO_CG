@@ -7,6 +7,8 @@ public class Zombies : MonoBehaviour
 {
     [SerializeField] private float timeEntreAtaque;
     [SerializeField] private float timeSigAtaque;
+    public GameObject ammoPrefab; // Prefab de la munición
+    public Transform dropPoint; 
 
     [Header("Salud")]
     public float salud;
@@ -111,8 +113,10 @@ public class Zombies : MonoBehaviour
             //muerte.Play();
             anim.SetTrigger("Death");
             playerManager.cantidadZombies--;
-            Invoke("DestruirPersonaje", 5f);  // Espera 1 segundo antes de destruir el objeto
+            Invoke("DestruirPersonaje", 10f); 
+            DropAmmo(); 
         } 
+        
     }
 
     public void Kill()
@@ -120,6 +124,34 @@ public class Zombies : MonoBehaviour
         salud = 0;
         Dead();
     }
+
+    private void DropAmmo()
+    {
+        Debug.Log("Intentando soltar munición...");
+
+        if (ammoPrefab != null && dropPoint != null)
+        {
+            Debug.Log("Prefab y DropPoint asignados correctamente.");
+
+        // Liberar el DropPoint de la jerarquía del zombie
+            dropPoint.parent = null;
+
+        // Calculamos la posición donde aparecerá la munición
+            Vector3 spawnPosition = dropPoint.position + Vector3.up * 1f;
+
+        // Instanciamos la munición
+            Instantiate(ammoPrefab, spawnPosition, Quaternion.identity);
+
+            Debug.Log("Munición instanciada en: " + spawnPosition);
+        }
+        else
+        {
+            Debug.LogError("Error: AmmoPrefab o DropPoint no están asignados.");
+
+        }
+    
+    }   
+
 
     public void DestruirPersonaje()
     {

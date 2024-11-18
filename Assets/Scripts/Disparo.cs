@@ -8,6 +8,10 @@ public class DisparoPrefab : MonoBehaviour
     public GameObject balaPrefab;
     public float fireRate;
     private Animator anim;
+
+    public int maxBalas = 60; 
+    public int balasRestantes; 
+    public int aumentaBalas = 30; // Cantidad de balas que otorga
     
     [SerializeField] private float tiempoDisparo;
     
@@ -16,12 +20,17 @@ public class DisparoPrefab : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+        balasRestantes = maxBalas;
     }
 
     public void Disparar()
     {
         
-        Instantiate(balaPrefab, firePoint.position, firePoint.rotation);
+        if (balasRestantes > 0) // Verificar que haya balas
+        {
+            GameObject bala = Instantiate(balaPrefab, firePoint.position, firePoint.rotation);
+            balasRestantes--;
+        }
         
     }
 
@@ -40,4 +49,5 @@ public class DisparoPrefab : MonoBehaviour
             }
         }   
     }
+
 }
