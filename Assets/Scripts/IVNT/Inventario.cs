@@ -51,6 +51,17 @@ public class Inventario : MonoBehaviour
     private string itemDescription;
     private Sprite itemIcon;
 
+	[Header("Sonidos")]
+    public AudioSource cogerLlave;
+    public AudioSource cogerMedkit;
+    public AudioSource cogerMata;
+    public AudioSource cogerMunicion;
+    public AudioSource CogerObjeto;
+    public AudioSource CogerTrofeo_voz;
+    public AudioSource CogerTrofeo_sonido;
+    public AudioSource curacion;
+    
+
     private void Start()
 	{
 		allSlots = SlotHolder.transform.childCount;

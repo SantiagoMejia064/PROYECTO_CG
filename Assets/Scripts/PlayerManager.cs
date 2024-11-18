@@ -21,6 +21,12 @@ public class PlayerManager : MonoBehaviour
     public int cantidadZombies = 0; // Cantidad de zombies generados
     private Animator anim;
 
+    [Header("Sonidos")]
+    public AudioSource RecibirDano;
+
+    
+
+
     void Start()
     {
         anim = GetComponent<Animator>();

@@ -15,18 +15,12 @@ public class Bala : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        /*
-        if(collision.CompareTag("Piso"))
-        {
-            Destroy(gameObject);
-        }
-        */
         if(collision.CompareTag("Enemigo"))
         {
             if(collision.GetComponent<Zombies>() != null){
                 collision.GetComponent<Zombies>().GetDamage(damage);
                 Destroy(gameObject);
-                //collision.GetComponent<Enemigo>().Dead();
+
             }
         }
         else{

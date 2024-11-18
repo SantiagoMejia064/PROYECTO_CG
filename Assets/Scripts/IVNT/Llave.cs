@@ -9,12 +9,15 @@ public class Llave : MonoBehaviour
     public GameObject MensajeLlave;
     public GameObject puertas;
 
+    [Header("Sonidos")]
+    public AudioSource cogerLlave;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             IMGLlave.SetActive(true);
-
+            cogerLlave.Play();
             MensajeLlave.SetActive(true);
         }
         

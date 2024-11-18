@@ -22,7 +22,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        slotIconGameObject = transform.GetChild(0);
+        //slotIconGameObject = transform.GetChild(0);
 
         inventario = FindAnyObjectByType<Inventario>();
     }
@@ -68,7 +68,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
             Image itemIconImage = slotIconGameObject.GetComponent<Image>();
             if (itemIconImage != null)
             {
-                itemIconImage.sprite = null; // Elimina el ícono
+                itemIconImage.sprite = null; // Elimina el ï¿½cono
             }
         }
 
