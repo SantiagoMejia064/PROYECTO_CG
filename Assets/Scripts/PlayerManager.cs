@@ -49,11 +49,21 @@ public class PlayerManager : MonoBehaviour
     public void CuracionMedKit()
     {
         salud = salud + 50;
+
+        if (salud > maxSalud)
+        {
+            salud = maxSalud;
+        }
     }
 
     public void CuracionMata()
     {
         salud = salud + 30;
+
+        if (salud > maxSalud)
+        {
+            salud = maxSalud;
+        }
     }
 
     public void Die()
