@@ -45,7 +45,7 @@ public class Inventario : MonoBehaviour
 	public GameObject panelRecoger;
 
     // Variables temporales para almacenar el item actual
-    private GameObject itemRecogido;
+    public GameObject itemRecogido;
     private int itemID;
     private string itemType;
     private string itemDescription;

@@ -14,11 +14,17 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public bool empty;
     public Sprite icon;
 
+    public Sprite defaultSprite; // La mascara o fondo del slot
+
     public Transform slotIconGameObject;
+
+    private Inventario inventario;
 
     private void Start()
     {
         slotIconGameObject = transform.GetChild(0);
+
+        inventario = FindAnyObjectByType<Inventario>();
     }
 
     public void UpdateSlot()
@@ -33,6 +39,40 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        UsarItem();
+        if (item != null)
+        {
+            UsarItem();
+
+            Destroy(item);
+
+            ClearSlot();
+        }
+    }
+
+    // Metodo para limpiar el contenido del slot
+    public void ClearSlot()
+    {
+        // Reiniciar referencias del item dentro del slot
+        item = null;
+        ID = 0;
+        type = null;
+        description = null;
+        icon = null;
+
+        // Restaurar el sprite del slot (la mascara o fondo predeterminado)
+        GetComponent<Image>().sprite = defaultSprite;
+
+        if (slotIconGameObject != null)
+        {
+            // Limpia unicamente el icono del hijo que representa al item
+            Image itemIconImage = slotIconGameObject.GetComponent<Image>();
+            if (itemIconImage != null)
+            {
+                itemIconImage.sprite = null; // Elimina el ícono
+            }
+        }
+
+        // Marcar el slot como vacio
+        empty = true;
     }
 }
