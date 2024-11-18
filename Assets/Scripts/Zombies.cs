@@ -110,7 +110,6 @@ public class Zombies : MonoBehaviour
         {
             //muerte.Play();
             anim.SetTrigger("Death");
-            playerManager.cantidadZombies--;
             Invoke("DestruirPersonaje", 5f);  // Espera 1 segundo antes de destruir el objeto
         } 
     }
