@@ -46,6 +46,16 @@ public class PlayerManager : MonoBehaviour
         Die();
     }
 
+    public void CuracionMedKit()
+    {
+        salud = salud + 50;
+    }
+
+    public void CuracionMata()
+    {
+        salud = salud + 30;
+    }
+
     public void Die()
     {
         if (salud <= 0)

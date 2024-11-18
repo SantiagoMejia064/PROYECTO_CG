@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Inventario : MonoBehaviour
 {
@@ -40,7 +42,16 @@ public class Inventario : MonoBehaviour
 	public Text Texto3;
 	public Text Mensaje;
 
-	private void Start()
+	public GameObject panelRecoger;
+
+    // Variables temporales para almacenar el item actual
+    private GameObject itemRecogido;
+    private int itemID;
+    private string itemType;
+    private string itemDescription;
+    private Sprite itemIcon;
+
+    private void Start()
 	{
 		allSlots = SlotHolder.transform.childCount;
 
@@ -74,21 +85,41 @@ public class Inventario : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if(other.tag == "Item")
-		{
-			GameObject itemRecogido = other.gameObject;
-			Item item = itemRecogido.GetComponent<Item>();
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Item")
+        {
+            itemRecogido = other.gameObject;
+            Item item = itemRecogido.GetComponent<Item>();
 
-			AddItem(itemRecogido, item.ID, item.type, item.description, item.icon);
-		}
+            // Asignar datos temporales del item
+            itemID = item.ID;
+            itemType = item.type;
+            itemDescription = item.description;
+            itemIcon = item.icon;
+
+            panelRecoger.SetActive(true);
+        }
+    }
+
+    public void colocarItem()
+    {
+        if (itemRecogido != null)
+        {
+            // Llamar a AddItem con los datos temporales
+            AddItem(itemRecogido, itemID, itemType, itemDescription, itemIcon);
+            panelRecoger.SetActive(false);
+        }
+    }
+	public void CancelarRecogida()
+	{
+		panelRecoger.SetActive(false);
 	}
 
-	public void AddItem(GameObject itemObject, int itemID, string itemType, string itemDescription, Sprite itemIcon)
-	{
-		for(int i = 0; i < allSlots; i++)
-		{
+    public void AddItem(GameObject itemObject, int itemID, string itemType, string itemDescription, Sprite itemIcon)
+    {
+        for(int i = 0; i < allSlots; i++)
+        {
 			if (slot[i].GetComponent<Slot>().empty)
 			{
 				itemObject.GetComponent<Item>().Recogido = true;
