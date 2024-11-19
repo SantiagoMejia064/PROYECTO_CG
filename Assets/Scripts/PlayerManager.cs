@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public int salud = 100;
     public int maxSalud = 100;
+    public float respawnDelay = 2f;
 
     [Header("Interfaz")]
     public Image barraSalud;
@@ -81,7 +82,20 @@ public class PlayerManager : MonoBehaviour
         if (salud <= 0)
         {
             anim.SetTrigger("Death");
-            Invoke("DestruirPersonaje", 3f); 
+            Invoke(nameof(Respawn), respawnDelay);
+        }
+    }
+    private void Respawn()
+    {
+        Vector3 respawnPosition = CheckManager.Instance.GetLastCheckpoint();
+        if (respawnPosition != Vector3.zero) // Si hay un checkpoint activado
+        {
+            transform.position = respawnPosition;
+            Debug.Log("Jugador reaparecido en: " + respawnPosition);
+        }
+        else
+        {
+            Debug.LogWarning("No se ha activado ningún checkpoint. Respawn en la posición inicial.");
         }
     }
 
