@@ -8,6 +8,9 @@ public class Trofeo : MonoBehaviour
     public GameObject IMGTrofeo;
     public GameObject Mensaje;
 
+    public AudioSource Cancion;
+    public AudioSource Voz;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -20,6 +23,8 @@ public class Trofeo : MonoBehaviour
 
     public void CerrarMensaje()
     {
+        Cancion.Play();
+        Voz.Play();
         Mensaje.SetActive(false);
         Destroy(trofeo);
     }

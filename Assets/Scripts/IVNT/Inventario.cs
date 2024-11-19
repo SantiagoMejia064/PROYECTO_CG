@@ -56,9 +56,8 @@ public class Inventario : MonoBehaviour
     public AudioSource CogerObjeto;
     public AudioSource CogerTrofeo_voz;
     public AudioSource CogerTrofeo_sonido;
-    
-    
 
+	
     private void Start()
 	{
 		allSlots = SlotHolder.transform.childCount;
@@ -82,7 +81,9 @@ public class Inventario : MonoBehaviour
 		{
 			inventoryEnabled = !inventoryEnabled;
 
-			if (inventoryEnabled)
+            inventario.SetActive(inventoryEnabled);
+
+            if (inventoryEnabled)
 			{
 				inventario.SetActive(true);
 			}
@@ -109,6 +110,13 @@ public class Inventario : MonoBehaviour
 
             panelRecoger.SetActive(true);
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Item")
+		{
+			panelRecoger.SetActive(false);
+		}
     }
 
     public void colocarItem()
