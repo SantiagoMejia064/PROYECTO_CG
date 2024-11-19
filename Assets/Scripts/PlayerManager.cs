@@ -25,9 +25,6 @@ public class PlayerManager : MonoBehaviour
     [Header("Sonidos")]
     public AudioSource RecibirDano;
 
-    
-
-
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -83,6 +80,7 @@ public class PlayerManager : MonoBehaviour
         {
             anim.SetTrigger("Death");
             Invoke(nameof(Respawn), respawnDelay);
+
         }
     }
     private void Respawn()
@@ -92,6 +90,8 @@ public class PlayerManager : MonoBehaviour
         {
             transform.position = respawnPosition;
             Debug.Log("Jugador reaparecido en: " + respawnPosition);
+            salud = maxSalud; // Restablecer la salud
+            //anim.SetTrigger("Respawn");
         }
         else
         {
