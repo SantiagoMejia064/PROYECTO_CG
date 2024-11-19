@@ -7,7 +7,7 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField] private Transform controlGolpe;
     [SerializeField] private float radioGolpe;
     [SerializeField] private int damageGolpe;
-    
+        
     public void Atacar()
     {
         
@@ -21,7 +21,7 @@ public class ZombieAttack : MonoBehaviour
                 PlayerManager player = colision.GetComponent<PlayerManager>();
                 if (player != null)
                 {
-                     player.GetDamage(damageGolpe);
+                    player.GetDamage(damageGolpe);
                 }
             }
         }

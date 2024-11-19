@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
     {
         salud -= dmg;  // Resta la cantidad de daño
         ojosRojos.alpha = 1;  // Hace que los ojos rojos se vean
-
+        RecibirDano.Play();  // Reproduce el sonido de recibir daño
         Die();
     }
 
@@ -91,11 +91,10 @@ public class PlayerManager : MonoBehaviour
             transform.position = respawnPosition;
             Debug.Log("Jugador reaparecido en: " + respawnPosition);
             salud = maxSalud; // Restablecer la salud
-            //anim.SetTrigger("Respawn");
         }
         else
         {
-            Debug.LogWarning("No se ha activado ningún checkpoint. Respawn en la posición inicial.");
+            Debug.Log("No se ha activado ningún checkpoint. Respawn en la posición inicial.");
         }
     }
 
@@ -119,7 +118,7 @@ public class PlayerManager : MonoBehaviour
         {
             yield return new WaitForSeconds(tiempoGeneracion); // Esperar tiempo determinado
 
-            if (cantidadZombies >= 15) // Si ya hay 15 zombies generados, no generar más
+            if (cantidadZombies >= 20) // Si ya hay 15 zombies generados, no generar más
             {
                 continue;
             }

@@ -9,6 +9,7 @@ public class Zombies : MonoBehaviour
     [SerializeField] private float timeSigAtaque;
     public GameObject ammoPrefab; // Prefab de la munición
     public Transform dropPoint; 
+    private bool isDeath = false;
 
     [Header("Salud")]
     public float salud;
@@ -25,6 +26,17 @@ public class Zombies : MonoBehaviour
     private Rigidbody rb;
     //public AudioSource muerte;
 
+    [Header("Sonidos")]
+    public AudioSource hitZombie;
+
+    [Header("Colisiones")]
+    public CapsuleCollider capsuleCollider; // Referencia al CapsuleCollider del enemigo
+    public float colliderAlturaMuerte = 0f; // Altura del CapsuleCollider al morir
+    public float colliderRadioMuerte = 0.14f; // Radio del CapsuleCollider al morir
+    public float nuevoRadio = 0.24f;
+    public float nuevaAltura = 0.36f;
+    public float nuevaBaseOffset = -0.8f;
+
 
     void Start()
     {
@@ -40,6 +52,7 @@ public class Zombies : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         
         if (anim == null)
         {
@@ -54,7 +67,7 @@ public class Zombies : MonoBehaviour
 
         float distancia = Vector3.Distance(transform.position, player.position);
 
-        if (distancia <= rangoDeteccion)
+        if (distancia <= rangoDeteccion && !isDeath)
         {
            
             agent.destination = player.position;
@@ -86,7 +99,7 @@ public class Zombies : MonoBehaviour
             
         }
 
-        if(player != null && playerManager.salud > 0){
+        if(player != null && playerManager.salud > 0 && !isDeath){
             if (timeEntreAtaque > timeSigAtaque){
                 if (distancia <= rangoAtaque)
                 {
@@ -103,6 +116,7 @@ public class Zombies : MonoBehaviour
     public void GetDamage(int dmg)
     {
         salud -= dmg;  // Resta la cantidad de daño
+        hitZombie.Play();  // Reproduce el sonido de recibir daño
         Dead();
     }
 
@@ -110,20 +124,32 @@ public class Zombies : MonoBehaviour
     {
         if (salud <= 0)
         {
+            isDeath = true;
             //muerte.Play();
             anim.SetTrigger("Death");
+            StartCoroutine(ReducirCollider());
+
             playerManager.cantidadZombies--;
             Invoke("DestruirPersonaje", 10f); 
             DropAmmo(); 
-        } 
-        
+        }  
     }
 
-    public void Kill()
+    private IEnumerator ReducirCollider()
     {
-        salud = 0;
-        Dead();
+        // Esperar 1 segundo para sincronizar con la animación (ajustar según tu animación)
+        yield return new WaitForSeconds(1.1f);
+
+        // Reducir el tamaño del CapsuleCollider
+        capsuleCollider.height = colliderAlturaMuerte;
+        capsuleCollider.radius = colliderRadioMuerte;
+
+        // Cambiar el radio y la altura del agente
+        agent.radius = nuevoRadio;
+        agent.height = nuevaAltura;
+        agent.baseOffset = nuevaBaseOffset;
     }
+
 
     private void DropAmmo()
     {

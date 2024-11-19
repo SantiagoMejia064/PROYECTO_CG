@@ -8,6 +8,7 @@ public class Bala : MonoBehaviour
     public Rigidbody rb;
     public int  damage;
 
+
     private void Start()
     {
         rb.velocity = transform.forward * speed;
