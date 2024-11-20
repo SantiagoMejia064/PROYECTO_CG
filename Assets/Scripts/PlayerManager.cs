@@ -48,7 +48,11 @@ public class PlayerManager : MonoBehaviour
 
     public void GetDamage(int dmg)
     {
-        salud -= dmg;  // Resta la cantidad de daño
+        salud -= dmg;
+        if(salud < 0)
+        {
+            salud = 0;
+        }  // Resta la cantidad de daño
         ojosRojos.alpha = 1;  // Hace que los ojos rojos se vean
         RecibirDano.Play();  // Reproduce el sonido de recibir daño
         Die();
@@ -86,6 +90,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Respawn()
     {
+         anim.Play("Idle", 0, 0); 
         Vector3 respawnPosition = CheckManager.Instance.GetLastCheckpoint();
         if (respawnPosition != Vector3.zero) // Si hay un checkpoint activado
         {
