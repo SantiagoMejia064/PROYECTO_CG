@@ -57,6 +57,8 @@ public class Inventario : MonoBehaviour
     public AudioSource CogerTrofeo_voz;
     public AudioSource CogerTrofeo_sonido;
 
+	public GameObject PP;
+
 	
     private void Start()
 	{
