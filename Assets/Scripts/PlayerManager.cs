@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public int salud = 100;
     public int maxSalud = 100;
-    public float respawnDelay = 2f;
+    public float respawnDelay = 1f;
 
     [Header("Interfaz")]
     public Image barraSalud;
@@ -83,6 +83,7 @@ public class PlayerManager : MonoBehaviour
 
         }
     }
+
     private void Respawn()
     {
         Vector3 respawnPosition = CheckManager.Instance.GetLastCheckpoint();
@@ -95,6 +96,7 @@ public class PlayerManager : MonoBehaviour
         else
         {
             Debug.Log("No se ha activado ningún checkpoint. Respawn en la posición inicial.");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
     }
 

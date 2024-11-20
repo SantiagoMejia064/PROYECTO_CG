@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CheckManager : MonoBehaviour
 {
-    public static CheckManager Instance; // Singleton para acceso global
-
-    private Vector3 lastCheckpointPosition; // Última posición del checkpoint activado
+    public static CheckManager Instance; 
+    private Vector3 lastCheckpointPosition; 
+    private bool checkpointActivado = false;
 
     void Awake()
     {
@@ -23,11 +23,18 @@ public class CheckManager : MonoBehaviour
 
     public void SetCheckpoint(Vector3 position)
     {
-        lastCheckpointPosition = position; // Actualiza la posición del último checkpoint
+        lastCheckpointPosition = position;
+        checkpointActivado = true; //Checkpoint activado colega
+        Debug.Log("Checkpoint activado en: " + position);
     }
 
     public Vector3 GetLastCheckpoint()
     {
         return lastCheckpointPosition; // Devuelve la posición del último checkpoint
+    }
+
+    public bool HayCheckpointActivado()
+    {
+        return checkpointActivado; // Devuelve si hay un checkpoint activado
     }
 }
