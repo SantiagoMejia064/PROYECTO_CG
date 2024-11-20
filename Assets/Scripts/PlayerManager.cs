@@ -13,6 +13,10 @@ public class PlayerManager : MonoBehaviour
     public Image barraSalud;
     public Text textoSalud;
     public CanvasGroup ojosRojos;
+    public GameObject panelGameOver;
+
+
+    private bool panelGameOverActivo = false;
 
     [Header("Zombies")]
     public float rangoMax = 20f; // Rango de generación de zombie máximo
@@ -37,6 +41,16 @@ public class PlayerManager : MonoBehaviour
         if (ojosRojos.alpha > 0)
         {
             ojosRojos.alpha -= Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            if(panelGameOverActivo){
+                panelGameOver.SetActive(false);
+                panelGameOverActivo = false;
+            } else {
+                panelGameOver.SetActive(true);
+                panelGameOverActivo = true;
+            }
         }
     }
 
