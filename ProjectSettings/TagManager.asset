@@ -12,6 +12,7 @@ TagManager:
   - Trofeo
   - PuertasX
   - Item
+  - hitZombieSound
   layers:
   - Default
   - TransparentFX

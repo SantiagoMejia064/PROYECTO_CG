@@ -20,6 +20,7 @@ public class Zombies : MonoBehaviour
     public PlayerManager playerManager;
     public float rangoDeteccion = 5f; // Rango de detección para seguir al jugador
     public float rangoAtaque = 1f; // Rango de ataque al jugador
+    public float rangoDestruccion;
     public float velocidad = 2f; // Velocidad de movimiento del enemigo
     public Animator anim; // Referencia al Animator del enemigo
 
@@ -50,9 +51,12 @@ public class Zombies : MonoBehaviour
             }
         }
 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerManager = player.GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        hitZombie = GameObject.Find("HitZombie").GetComponent<AudioSource>();
         
         if (anim == null)
         {
@@ -99,6 +103,12 @@ public class Zombies : MonoBehaviour
             
         }
 
+
+        if(distancia > rangoDestruccion){
+            Destroy(gameObject);
+            playerManager.cantidadZombies--;
+        }
+
         if(player != null && playerManager.salud > 0 && !isDeath){
             if (timeEntreAtaque > timeSigAtaque){
                 if (distancia <= rangoAtaque)
@@ -128,11 +138,21 @@ public class Zombies : MonoBehaviour
             //muerte.Play();
             anim.SetTrigger("Death");
             StartCoroutine(ReducirCollider());
-
             playerManager.cantidadZombies--;
-            Invoke("DestruirPersonaje", 10f); 
+            Invoke("DestruirPersonaje", 3f); 
             DropAmmo(); 
         }  
+    }
+
+    private void DestruirPersonaje()
+    {
+        Destroy(gameObject);
+    }
+
+    public void OnBecameInvisible()
+    {
+        playerManager.cantidadZombies--;
+        Destroy(gameObject);
     }
 
     private IEnumerator ReducirCollider()
@@ -175,14 +195,7 @@ public class Zombies : MonoBehaviour
             Debug.LogError("Error: AmmoPrefab o DropPoint no están asignados.");
 
         }
-    
     }   
-
-
-    public void DestruirPersonaje()
-    {
-        Destroy(gameObject);  // Destruye el objeto donde está este script (el enemigo)
-    }
 
     // Opcional: Dibujar el rango de detección en la escena
     private void OnDrawGizmosSelected()
