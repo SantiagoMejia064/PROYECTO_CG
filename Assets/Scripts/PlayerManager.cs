@@ -7,7 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public int salud = 100;
     public int maxSalud = 100;
-    public float respawnDelay = 1f;
+    public float respawnDelay = 0f;
 
     [Header("Interfaz")]
     public Image barraSalud;

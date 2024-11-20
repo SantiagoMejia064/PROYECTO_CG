@@ -178,17 +178,11 @@ public class Zombies : MonoBehaviour
         if (ammoPrefab != null && dropPoint != null)
         {
             Debug.Log("Prefab y DropPoint asignados correctamente.");
-
-        // Liberar el DropPoint de la jerarquía del zombie
             dropPoint.parent = null;
-
-        // Calculamos la posición donde aparecerá la munición
+        // Posicion de reaparicion del cargadorcito
             Vector3 spawnPosition = dropPoint.position + Vector3.up * 1f;
-
-        // Instanciamos la munición
             Instantiate(ammoPrefab, spawnPosition, Quaternion.identity);
 
-            Debug.Log("Munición instanciada en: " + spawnPosition);
         }
         else
         {

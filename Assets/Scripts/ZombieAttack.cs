@@ -7,6 +7,8 @@ public class ZombieAttack : MonoBehaviour
     [SerializeField] private Transform controlGolpe;
     [SerializeField] private float radioGolpe;
     [SerializeField] private int damageGolpe;
+
+    private bool jugadorVivo = true;
         
     public void Atacar()
     {
@@ -22,6 +24,10 @@ public class ZombieAttack : MonoBehaviour
                 if (player != null)
                 {
                     player.GetDamage(damageGolpe);
+                }
+                else
+                {
+                    jugadorVivo = false; 
                 }
             }
         }
