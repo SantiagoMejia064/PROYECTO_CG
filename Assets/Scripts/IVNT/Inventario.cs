@@ -1,12 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Inventario : MonoBehaviour
 {

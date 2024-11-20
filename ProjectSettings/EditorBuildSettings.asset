@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Cinematica(NOTOCAR).unity
+    guid: c2f2e134c774d354b8698f2132c530fe
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: b28c1272156153e48b8f7fe190c55e21
   - enabled: 1
