@@ -9,11 +9,15 @@ public class RecogerMunicion : MonoBehaviour
     public float floatAmplitude = 0.1f; 
     public float floatSpeed = 100f; 
 
+    [Header("Sonidos")]
+    public AudioSource sonidoRecogida;
+    
     private Vector3 startPosition;
     
     void Start()
     {
         startPosition = transform.position;
+        sonidoRecogida = GameObject.Find("RecogerMunicion").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -32,6 +36,7 @@ public class RecogerMunicion : MonoBehaviour
             DisparoPrefab disparoPrefab = other.GetComponent<DisparoPrefab>();
             if (disparoPrefab != null)
             {
+                sonidoRecogida.Play();
                 // Aumenta las balas mias
                 disparoPrefab.balasRestantes += ammoAmount;
 
@@ -41,7 +46,6 @@ public class RecogerMunicion : MonoBehaviour
                     disparoPrefab.balasRestantes = disparoPrefab.maxBalas;
                 }
                 
-                Debug.Log($"Munición recogida: +{ammoAmount}. Balas actuales: {disparoPrefab.balasRestantes}");
             }
 
             Destroy(gameObject);

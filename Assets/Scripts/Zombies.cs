@@ -73,33 +73,20 @@ public class Zombies : MonoBehaviour
 
         if (distancia <= rangoDeteccion && !isDeath)
         {
-           
-            agent.destination = player.position;
-            anim.SetBool("Walk", true); // Activar animación de caminar
-
-            /*
-            // Dirección hacia el jugador
-            Vector3 direccion = (player.position - transform.position).normalized;
-
-            // Movimiento del enemigo
-            Vector3 nuevaPosicion = new Vector3(direccion.x * velocidad, rb.velocity.y, direccion.z * velocidad);
-            rb.velocity = nuevaPosicion;
-
-            anim.SetBool("Walk", true); // Activar animación de caminar
-
-            // Rotación del enemigo usando Quaternion para evitar conflictos
-            Quaternion nuevaRotacion = Quaternion.LookRotation(new Vector3(direccion.x, 0, direccion.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, nuevaRotacion, Time.deltaTime * velocidad);
-            */
+            if (agent.isOnNavMesh)
+            {
+                agent.destination = player.position;
+                anim.SetBool("Walk", true); 
+            }
+            
         }
         else
         {
-            /*
-            // Si el jugador está fuera del rango, detener el movimiento
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            */
-            agent.destination = agent.transform.position;
-            anim.SetBool("Walk", false); // Desactivar animación de caminar
+            if (agent.isOnNavMesh)
+            {
+                agent.destination = agent.transform.position;
+                anim.SetBool("Walk", false);
+            }
             
         }
 

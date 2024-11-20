@@ -9,6 +9,15 @@ public class CheckPoint : MonoBehaviour
     public Text mensajeTexto; 
     public float tiempoMensaje = 1f; 
 
+    [Header("Sonidos")]
+    public AudioSource sonidoActivacion;
+    
+
+    void Start()
+    {
+        sonidoActivacion = GameObject.Find("checkPoint").GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         // Aplica la rotación continua
@@ -21,6 +30,7 @@ public class CheckPoint : MonoBehaviour
         {
             CheckManager.Instance.SetCheckpoint(transform.position);
             Debug.Log("Checkpoint activado en: " + transform.position);
+            sonidoActivacion.Play();
             Destroy(gameObject);
             MostrarMensaje("+ CheckPoint activado");
         }

@@ -215,9 +215,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97081c75d45b8184dad65655301728d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoAmount: 40
+  ammoAmount: 10
   floatAmplitude: 0.2
   floatSpeed: 5
+  sonidoRecogida: {fileID: 0}
 --- !u!114 &2219008256087856504
 MonoBehaviour:
   m_ObjectHideFlags: 0
