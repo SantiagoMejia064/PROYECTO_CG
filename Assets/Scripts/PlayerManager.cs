@@ -104,7 +104,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Respawn()
     {
-         anim.Play("Idle", 0, 0); 
+        anim.Play("Idle", 0, 0); 
         Vector3 respawnPosition = CheckManager.Instance.GetLastCheckpoint();
         if (respawnPosition != Vector3.zero) // Si hay un checkpoint activado
         {
@@ -139,7 +139,7 @@ public class PlayerManager : MonoBehaviour
         {
             yield return new WaitForSeconds(tiempoGeneracion); // Esperar tiempo determinado
 
-            if (cantidadZombies >= 20) // Si ya hay 15 zombies generados, no generar más
+            if (cantidadZombies >= 15) // Si ya hay 15 zombies generados, no generar más
             {
                 continue;
             }
